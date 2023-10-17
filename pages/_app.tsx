@@ -1,14 +1,20 @@
-import { Global, css } from "@emotion/react";
-import { AppProps } from "next/app";
-import globalStyles from "../src/styles/global";
+// pages/_app.tsx
 
-function MyApp({ Component, pageProps }: AppProps) {
+import React from "react";
+import { AppProps } from "next/app";
+import { css, Global } from "@emotion/react";
+import globalStyles from "../src/styles/global";
+import Layout from "../src/components/Layout";
+
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <>
       <Global styles={css(globalStyles)} />
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
-}
+};
 
 export default MyApp;
