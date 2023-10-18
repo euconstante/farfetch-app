@@ -1,8 +1,7 @@
-// components/Header.tsx
-
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import Link from "next/link";
+import { navLinks } from "../constants/data";
 
 const HeaderContainer = styled.header`
   background-color: #333;
@@ -19,7 +18,9 @@ const Logo = styled.div`
   cursor: pointer;
 `;
 
-const Navigation = styled.nav``;
+const Navigation = styled.nav`
+  display: flex;
+`;
 
 const NavLink = styled.a`
   color: #fff;
@@ -27,7 +28,6 @@ const NavLink = styled.a`
   text-decoration: none;
   position: relative;
   cursor: pointer;
-
   &:hover {
     text-decoration: underline;
   }
@@ -38,8 +38,8 @@ const SubMenu = styled.ul`
   padding: 0;
   margin: 0;
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: 100;
+  left: 100;
   display: none;
 `;
 
@@ -58,83 +58,46 @@ const SubMenuLink = styled.a`
 `;
 
 const Header: React.FC = () => {
-  // const handleSubMenuHover = (submenuId: string) => {
-  //   const submenu = document.getElementById(submenuId);
-  //   if (submenu) {
-  //     submenu.style.display = "block";
-  //   }
-  // };
+  const [hoveredSubMenu, setHoveredSubMenu] = useState<string | null>(null);
 
-  // const handleSubMenuLeave = (submenuId: string) => {
-  //   const submenu = document.getElementById(submenuId);
-  //   if (submenu) {
-  //     submenu.style.display = "none";
-  //   }
-  // };
+  const handleSubMenuHover = (submenuId: string) => {
+    setHoveredSubMenu(submenuId);
+  };
+
+  const handleSubMenuLeave = () => {
+    setHoveredSubMenu(null);
+  };
 
   return (
     <HeaderContainer>
-      <Logo>Your Name</Logo>
+      <Link href="/">
+        {" "}
+        <Logo>Your Name</Logo>
+      </Link>
       <Navigation>
-        <NavLink
-        // onMouseEnter={() => handleSubMenuHover("about-submenu")}
-        // onMouseLeave={() => handleSubMenuLeave("about-submenu")}
-        >
-          About
-          <SubMenu id="about-submenu">
-            <SubMenuItem>
-              <Link href="/about#career">
-                <SubMenuLink>Career</SubMenuLink>
-              </Link>
-            </SubMenuItem>
-            <SubMenuItem>
-              <Link href="/about#projects">
-                <SubMenuLink>Projects</SubMenuLink>
-              </Link>
-            </SubMenuItem>
-            <SubMenuItem>
-              <Link href="/about#interests">
-                <SubMenuLink>Interests</SubMenuLink>
-              </Link>
-            </SubMenuItem>
-          </SubMenu>
-        </NavLink>
-        {/* <NavLink
-          onMouseEnter={() => handleSubMenuHover("work-submenu")}
-          onMouseLeave={() => handleSubMenuLeave("work-submenu")}
-        >
-          Work
-          <SubMenu id="work-submenu">
-            <SubMenuItem>
-              <Link href="/work#companies">
-                <SubMenuLink>Companies</SubMenuLink>
-              </Link>
-            </SubMenuItem>
-            <SubMenuItem>
-              <Link href="/work#projects">
-                <SubMenuLink>Projects</SubMenuLink>
-              </Link>
-            </SubMenuItem>
-          </SubMenu>
-        </NavLink> */}
-        {/* <NavLink
-          onMouseEnter={() => handleSubMenuHover("contact-submenu")}
-          onMouseLeave={() => handleSubMenuLeave("contact-submenu")}
-        >
-          Contact
-          <SubMenu id="contact-submenu">
-            <SubMenuItem>
-              <Link href="/contact#linkedin">
-                <SubMenuLink>LinkedIn</SubMenuLink>
-              </Link>
-            </SubMenuItem>
-            <SubMenuItem>
-              <Link href="/contact#github">
-                <SubMenuLink>GitHub</SubMenuLink>
-              </Link>
-            </SubMenuItem>
-          </SubMenu>
-        </NavLink> */}
+        {navLinks.map((link, index) => (
+          <div
+            key={index}
+            onMouseEnter={() => handleSubMenuHover(link.name)}
+            onMouseLeave={handleSubMenuLeave}
+          >
+            <NavLink href={link.path}>{link.name}</NavLink>
+            <SubMenu
+              id={link.name}
+              style={{
+                display: hoveredSubMenu === link.name ? "block" : "none",
+              }}
+            >
+              {link.submenuId.map((sublink, subIndex) => (
+                <SubMenuItem key={subIndex}>
+                  <SubMenuLink href={`${link.path}#${sublink}`}>
+                    {sublink}
+                  </SubMenuLink>
+                </SubMenuItem>
+              ))}
+            </SubMenu>
+          </div>
+        ))}
       </Navigation>
     </HeaderContainer>
   );

@@ -47,7 +47,7 @@ const WorkPage: React.FC = () => {
       </WorkContent>
       <SectionHeading id="projects">Projects</SectionHeading>
       <WorkContent>
-        Explore the various projects weve undertaken, showcasing our expertise
+        {/* Explore the various projects weve undertaken, showcasing our expertise
         and capabilities.
         <h1>Welcome to Your Portfolio</h1>
         <p>
@@ -66,7 +66,7 @@ const WorkPage: React.FC = () => {
           <Button variant="secondary" onClick={handleButtonClick}>
             Secondary Button
           </Button>
-        </div>
+        </div> */}
       </WorkContent>
     </WorkContainer>
   );
