@@ -1,6 +1,8 @@
+// components/Header.tsx
+
 import React from "react";
 import styled from "@emotion/styled";
-import { useState } from "react";
+import Link from "next/link";
 
 const HeaderContainer = styled.header`
   background-color: #333;
@@ -25,6 +27,7 @@ const NavLink = styled.a`
   text-decoration: none;
   position: relative;
   cursor: pointer;
+
   &:hover {
     text-decoration: underline;
   }
@@ -55,65 +58,83 @@ const SubMenuLink = styled.a`
 `;
 
 const Header: React.FC = () => {
-  const [isAboutOpen, setIsAboutOpen] = useState(false);
-  const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
-  const [isContactOpen, setIsContactOpen] = useState(false);
+  // const handleSubMenuHover = (submenuId: string) => {
+  //   const submenu = document.getElementById(submenuId);
+  //   if (submenu) {
+  //     submenu.style.display = "block";
+  //   }
+  // };
+
+  // const handleSubMenuLeave = (submenuId: string) => {
+  //   const submenu = document.getElementById(submenuId);
+  //   if (submenu) {
+  //     submenu.style.display = "none";
+  //   }
+  // };
 
   return (
     <HeaderContainer>
       <Logo>Your Name</Logo>
       <Navigation>
         <NavLink
-          onMouseEnter={() => setIsAboutOpen(true)}
-          onMouseLeave={() => setIsAboutOpen(false)}
+        // onMouseEnter={() => handleSubMenuHover("about-submenu")}
+        // onMouseLeave={() => handleSubMenuLeave("about-submenu")}
         >
           About
-          {isAboutOpen && (
-            <SubMenu>
-              <SubMenuItem>
-                <SubMenuLink href="#career">Career</SubMenuLink>
-              </SubMenuItem>
-              <SubMenuItem>
-                <SubMenuLink href="#interests">Interests</SubMenuLink>
-              </SubMenuItem>
-            </SubMenu>
-          )}
+          <SubMenu id="about-submenu">
+            <SubMenuItem>
+              <Link href="/about#career">
+                <SubMenuLink>Career</SubMenuLink>
+              </Link>
+            </SubMenuItem>
+            <SubMenuItem>
+              <Link href="/about#projects">
+                <SubMenuLink>Projects</SubMenuLink>
+              </Link>
+            </SubMenuItem>
+            <SubMenuItem>
+              <Link href="/about#interests">
+                <SubMenuLink>Interests</SubMenuLink>
+              </Link>
+            </SubMenuItem>
+          </SubMenu>
         </NavLink>
-        <NavLink
-          onMouseEnter={() => setIsPortfolioOpen(true)}
-          onMouseLeave={() => setIsPortfolioOpen(false)}
+        {/* <NavLink
+          onMouseEnter={() => handleSubMenuHover("work-submenu")}
+          onMouseLeave={() => handleSubMenuLeave("work-submenu")}
         >
-          Portfolio
-          {isPortfolioOpen && (
-            <SubMenu>
-              <SubMenuItem>
-                <SubMenuLink href="#companies">Companies</SubMenuLink>
-              </SubMenuItem>
-              <SubMenuItem>
-                <SubMenuLink href="#projects">Projects</SubMenuLink>
-              </SubMenuItem>
-            </SubMenu>
-          )}
-        </NavLink>
-        <NavLink
-          onMouseEnter={() => setIsContactOpen(true)}
-          onMouseLeave={() => setIsContactOpen(false)}
+          Work
+          <SubMenu id="work-submenu">
+            <SubMenuItem>
+              <Link href="/work#companies">
+                <SubMenuLink>Companies</SubMenuLink>
+              </Link>
+            </SubMenuItem>
+            <SubMenuItem>
+              <Link href="/work#projects">
+                <SubMenuLink>Projects</SubMenuLink>
+              </Link>
+            </SubMenuItem>
+          </SubMenu>
+        </NavLink> */}
+        {/* <NavLink
+          onMouseEnter={() => handleSubMenuHover("contact-submenu")}
+          onMouseLeave={() => handleSubMenuLeave("contact-submenu")}
         >
           Contact
-          {isContactOpen && (
-            <SubMenu>
-              <SubMenuItem>
-                <SubMenuLink href="#linkedin">LinkedIn</SubMenuLink>
-              </SubMenuItem>
-              <SubMenuItem>
-                <SubMenuLink href="#github">GitHub</SubMenuLink>
-              </SubMenuItem>
-              <SubMenuItem>
-                <SubMenuLink href="#email">E-mail</SubMenuLink>
-              </SubMenuItem>
-            </SubMenu>
-          )}
-        </NavLink>
+          <SubMenu id="contact-submenu">
+            <SubMenuItem>
+              <Link href="/contact#linkedin">
+                <SubMenuLink>LinkedIn</SubMenuLink>
+              </Link>
+            </SubMenuItem>
+            <SubMenuItem>
+              <Link href="/contact#github">
+                <SubMenuLink>GitHub</SubMenuLink>
+              </Link>
+            </SubMenuItem>
+          </SubMenu>
+        </NavLink> */}
       </Navigation>
     </HeaderContainer>
   );
