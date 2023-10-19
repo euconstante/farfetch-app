@@ -1,10 +1,10 @@
-// pages/_app.tsx
-
 import React from "react";
 import { AppProps } from "next/app";
 import { css, Global } from "@emotion/react";
-import globalStyles from "../src/styles/global";
-import Layout from "../src/components/Layout";
+import Layout from "@/components/Layout";
+
+import globalStyles from "@/styles/global";
+import "@/styles/design_tokens.css";
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (

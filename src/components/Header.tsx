@@ -4,16 +4,19 @@ import Link from "next/link";
 import { navLinks } from "../constants/data";
 
 const HeaderContainer = styled.header`
-  background-color: #333;
-  color: #fff;
+  background-color: var(--white);
+  color: var(--dark);
   padding: 1rem;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid var(--grey);
+  position: sticky;
 `;
 
 const Logo = styled.div`
-  font-size: 24px;
+  font-size: var(--font-size-lg);
   font-weight: bold;
   cursor: pointer;
 `;
@@ -23,7 +26,6 @@ const Navigation = styled.nav`
 `;
 
 const NavLink = styled.a`
-  color: #fff;
   margin: 0 1rem;
   text-decoration: none;
   position: relative;
